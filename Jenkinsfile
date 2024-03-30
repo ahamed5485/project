@@ -29,6 +29,17 @@ pipeline {
                 }
             }
         }
+        stage('Application deploy') {
+        
+            steps {
+                script {
+                    // Deploy application
+                        sh 'docker-compose down'
+                        sh 'docker-compose up'
+                    }
+                }
+            }
+        }        
     }
 }
 
