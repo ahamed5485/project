@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Push Docker image
-                    docker.withRegistry("${DOCKER_REGISTRY}", 'your_registry_credentials_id') {
+                    docker.withRegistry("${DOCKER_REGISTRY}", 'docker') {
                         docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
                     }
                 }
