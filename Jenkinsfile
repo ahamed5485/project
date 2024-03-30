@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_REGISTRY = "ahamed5485"
-        IMAGE_NAME = "dev"
+        DOCKER_REGISTRY = "https://index.docker.io/v1/"
+        IMAGE_NAME = "ahamed5485/dev"
         IMAGE_TAG = "latest"
     }
     
