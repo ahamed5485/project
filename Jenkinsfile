@@ -11,17 +11,6 @@ pipeline {
     stages {
         stage(' DEV Build Docker Image') {
             when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    // Build Docker image
-                    docker.build("${PROD_IMAGE_NAME}:${IMAGE_TAG}")
-                }
-            }
-        }
-        stage(' PROD Build Docker Image') {
-            when {
                 branch 'dev'
             }
             steps {
@@ -31,11 +20,22 @@ pipeline {
                 }
             }
         }
-        stage('Push DEV Docker Image') {
+        stage(' PROD Build Docker Image') {
+            when {
+                branch 'master'
+            }
             steps {
-                when {
-                    branch 'master'
+                script {
+                    // Build Docker image
+                    docker.build("${PROD_IMAGE_NAME}:${IMAGE_TAG}")
+                }
+            }
+        }
+        stage('Push DEV Docker Image') {
+            when {
+                   branch 'dev'
                  }
+            steps {
                 script {
                     // Push Docker image
                     docker.withRegistry("${DOCKER_REGISTRY}", 'docker') {
@@ -45,10 +45,10 @@ pipeline {
             }
         }
         stage('Push PROD Docker Image') {
-            steps {
-                when {
-                    branch 'dev'
+            when {
+                    branch 'master'
                 }
+            steps {
                 script {
                     // Push Docker image
                     docker.withRegistry("${DOCKER_REGISTRY}", 'docker') {
