@@ -1,8 +1,6 @@
 version: '3'
 services:
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ahamed5485/production
     ports:
       - "80:80"  
