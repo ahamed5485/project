@@ -38,8 +38,7 @@ pipeline {
                         sh 'docker-compose up'
                     }
                 }
-            }
-        }        
+            }      
     }
 }
 
